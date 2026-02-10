@@ -1,0 +1,27 @@
+/*
+  XMBish - Steam Deck CSS Loader theme
+  Notes:
+  - Keep selectors short and resilient.
+  - Start with styling only.  Avoid large layout reflows until you have stable selectors.
+*/
+
+/* Step 1 sanity check: enable this temporarily to confirm injection.
+* { outline: 1px solid rgba(255, 0, 0, 0.05) !important; }
+*/
+
+/* Global vibe tweaks */
+html, body {
+  filter: saturate(0.92) contrast(1.03) !important;
+}
+
+/* Reduce heavy shadows and rounded corners for a cleaner XMB-like feel */
+* {
+  box-shadow: none !important;
+}
+
+/* Slightly tighten typography */
+* {
+  letter-spacing: 0.2px !important;
+}
+
+/* Placeholder for future: dynamic background layer will go here once we capture a stable root selector. */

@@ -1,0 +1,15 @@
+{
+  "name": "XMBish",
+  "author": "yourname",
+  "version": "v0.1.0",
+  "description": "XMB-style reskin WIP for Steam Deck Game Mode via Decky CSS Loader",
+  "target": "Other",
+  "manifest_version": 8,
+  "inject": {
+    "shared.css": [
+      "bigpicture",
+      "QuickAccess",
+      "MainMenu"
+    ]
+  }
+}
