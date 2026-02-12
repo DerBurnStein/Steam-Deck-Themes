@@ -1,0 +1,43 @@
+/* Optional patch: stronger XMB crossbar and list rhythm treatment. */
+
+:root {
+  --xmb-crossbar-height: 2px;
+  --xmb-row-glow: rgba(89, 207, 255, 0.24);
+}
+
+/* Tab row polish */
+[class*="gamepadtabbedpage_Tab"],
+[class*="gamepadtabbedpage_Tab_"] {
+  padding-top: 2px !important;
+  padding-bottom: 5px !important;
+}
+
+[class*="gamepadtabbedpage_Selected"],
+[role="tab"][aria-selected="true"] {
+  box-shadow:
+    inset 0 calc(-1 * var(--xmb-crossbar-height)) 0 0 var(--xmb-accent),
+    inset 0 0 0 1px rgba(89, 207, 255, 0.12) !important;
+}
+
+/* Entry cards/rows feel flatter and more horizontal. */
+[class*="Tile"],
+[class*="Entry"],
+[class*="Row"] {
+  border-radius: 4px !important;
+}
+
+.gpfocus[class*="Tile"],
+.gpfocus[class*="Entry"],
+.gpfocus[class*="Row"] {
+  box-shadow:
+    0 0 0 1px rgba(149, 227, 255, 0.7),
+    0 0 12px var(--xmb-row-glow) !important;
+}
+
+/* Slightly tighter vertical stack spacing where class names suggest lists. */
+[class*="List"] [class*="Row"],
+[class*="List"] [class*="Entry"],
+[class*="Section"] [class*="Row"] {
+  margin-top: 2px !important;
+  margin-bottom: 2px !important;
+}
