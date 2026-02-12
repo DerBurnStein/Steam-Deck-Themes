@@ -1,0 +1,12 @@
+/* Optional palette: teal-forward XMB variant. */
+
+:root {
+  --xmb-bg-0: #061f20;
+  --xmb-bg-1: #0b3134;
+  --xmb-bg-2: #1b4e53;
+  --xmb-accent: #63f0df;
+  --xmb-focus: #98fff2;
+  --xmb-text: #ebfffd;
+  --xmb-text-dim: #c2eeea;
+  --xmb-surface: rgba(9, 35, 37, 0.74);
+}

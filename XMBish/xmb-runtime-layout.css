@@ -1,0 +1,81 @@
+/*
+  ID-anchored runtime layout reflow for Big Picture.
+  Uses stable IDs from runtime snapshots: #header, #Main, #Footer.
+*/
+
+:root {
+  --xmb-runtime-rail: min(27vw, 430px);
+  --xmb-runtime-gap: clamp(18px, 2vw, 30px);
+}
+
+/* Main content shifts right into an XMB canvas lane. */
+#Main {
+  position: relative !important;
+  padding-left: calc(var(--xmb-runtime-rail) + var(--xmb-runtime-gap)) !important;
+  padding-top: clamp(36px, 5vh, 80px) !important;
+  transition: padding-left 180ms ease;
+}
+
+/* Left rail surface */
+#Main::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: var(--xmb-runtime-rail);
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(8, 16, 30, 0.72), rgba(8, 16, 30, 0.24)),
+    linear-gradient(90deg, rgba(100, 205, 255, 0.24), rgba(100, 205, 255, 0));
+  border-right: 1px solid rgba(100, 205, 255, 0.3);
+  backdrop-filter: blur(4px);
+}
+
+/* Vertical category scaffold inside left rail */
+#Main::after {
+  content: "LIBRARY\A\A  Installed\A  Favorites\A  Non-Steam\A\A  Open Full Library";
+  position: absolute;
+  left: clamp(10px, 1.4vw, 22px);
+  top: clamp(20px, 3vh, 40px);
+  width: calc(var(--xmb-runtime-rail) - clamp(20px, 3vw, 46px));
+  white-space: pre-wrap;
+  pointer-events: none;
+  color: rgba(236, 246, 255, 0.96);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+  font-size: clamp(14px, 1.3vw, 22px);
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+}
+
+/* Keep top categories visible as a crossbar header string. */
+#header::after {
+  content: "HOME   LIBRARY   STORE   SOCIAL   MEDIA   DOWNLOADS   SETTINGS";
+  position: absolute;
+  left: clamp(16px, 2vw, 32px);
+  right: clamp(16px, 2vw, 32px);
+  top: clamp(8px, 1.2vh, 16px);
+  pointer-events: none;
+  white-space: pre;
+  color: rgba(236, 246, 255, 0.94);
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  font-weight: 560;
+  font-size: clamp(14px, 1.25vw, 22px);
+}
+
+/* De-emphasize native tablist rows so XMB shell reads as primary IA. */
+#Main [role="tablist"],
+#Main [class*="tabbedpage_TabContents"],
+#Main [class*="tabbedpage_TabRow"] {
+  opacity: 0.45 !important;
+  transform: scale(0.97) translateY(6px) !important;
+  transform-origin: left center;
+}
+
+/* Content cards gain lane-consistent width after left rail shift. */
+#Main [class*="Section"],
+#Main [class*="Row"],
+#Main [class*="Tile"] {
+  max-width: min(100vw - var(--xmb-runtime-rail) - 80px, 1450px) !important;
+}

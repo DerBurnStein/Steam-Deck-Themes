@@ -1,0 +1,81 @@
+/*
+  Experimental structural layout patch.
+  Goal: push the UI closer to classic XMB composition with a persistent left rail
+  and a right-side content canvas.
+*/
+
+:root {
+  --xmb-rail-width: min(30vw, 520px);
+  --xmb-rail-gap: clamp(16px, 2vw, 32px);
+}
+
+/* Candidate shell containers for Game Mode home/library surfaces. */
+[class*="gamepadlibrary_GamepadLibrary"],
+[class*="libraryhome"],
+[class*="gamepadhome"],
+[class*="HomePage"],
+[class*="BasicUI"] [class*="library"] {
+  position: relative;
+}
+
+/* Move broad content area to the right to make room for left rail. */
+[class*="gamepadlibrary_GamepadLibrary"] > *:not([class*="gamepadtabbedpage"]),
+[class*="libraryhome"] > *:not([class*="gamepadtabbedpage"]),
+[class*="gamepadhome"] > *:not([class*="gamepadtabbedpage"]),
+[class*="HomePage"] > *:not([class*="gamepadtabbedpage"]) {
+  margin-left: calc(var(--xmb-rail-width) + var(--xmb-rail-gap)) !important;
+}
+
+/* Pin likely 'recent / shelf / carousel' containers as a vertical rail. */
+[class*="Recent"],
+[class*="recent"],
+[class*="Shelf"],
+[class*="shelf"],
+[class*="Carousel"],
+[class*="carousel"] {
+  position: fixed !important;
+  left: clamp(12px, 1.2vw, 26px) !important;
+  top: clamp(84px, 12vh, 180px) !important;
+  width: var(--xmb-rail-width) !important;
+  max-height: calc(100vh - clamp(130px, 18vh, 220px)) !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  padding-right: 6px !important;
+  z-index: 8 !important;
+  background: linear-gradient(180deg, rgba(4, 12, 24, 0.64), rgba(6, 16, 32, 0.24)) !important;
+  border-right: 1px solid rgba(109, 198, 255, 0.22) !important;
+  backdrop-filter: blur(4px);
+}
+
+/* Force row carousels in the rail into vertical stack behavior. */
+[class*="Recent"] [class*="Tile"],
+[class*="recent"] [class*="Tile"],
+[class*="Shelf"] [class*="Tile"],
+[class*="shelf"] [class*="Tile"],
+[class*="Carousel"] [class*="Tile"],
+[class*="carousel"] [class*="Tile"],
+[class*="Recent"] [class*="Entry"],
+[class*="Shelf"] [class*="Entry"],
+[class*="Carousel"] [class*="Entry"] {
+  width: 100% !important;
+  min-width: 100% !important;
+  margin: 0 0 10px 0 !important;
+}
+
+/* Keep top tab row spanning the full viewport for category navigation. */
+[class*="gamepadtabbedpage_TabContents"],
+[class*="gamepadtabbedpage_TabRow"],
+[role="tablist"] {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 15 !important;
+  background: linear-gradient(180deg, rgba(4, 12, 24, 0.9), rgba(4, 12, 24, 0.35)) !important;
+  backdrop-filter: blur(4px);
+}
+
+/* Main canvas cards become broader to better fill right pane. */
+[class*="gamepadlibrary_GamepadLibrary"] [class*="Section"],
+[class*="libraryhome"] [class*="Section"],
+[class*="gamepadhome"] [class*="Section"] {
+  max-width: min(100vw - var(--xmb-rail-width) - 80px, 1400px) !important;
+}

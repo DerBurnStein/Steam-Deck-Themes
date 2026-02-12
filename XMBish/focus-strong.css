@@ -1,0 +1,24 @@
+/* Optional patch: stronger focus affordances for 10-foot controller UX. */
+
+.gpfocus,
+:focus-visible,
+[class*="Focused"],
+[class*="focused"] {
+  outline: 2px solid var(--xmb-focus) !important;
+  outline-offset: 1px !important;
+  box-shadow: 0 0 0 1px rgba(14, 56, 95, 0.6), 0 0 14px rgba(120, 214, 255, 0.35) !important;
+}
+
+.gpfocus[class*="Tile"],
+.gpfocus[class*="Entry"],
+.gpfocus[role="button"] {
+  transform: translateY(-1px);
+  filter: brightness(1.06);
+}
+
+[class*="Tile"],
+[class*="Entry"],
+[role="button"],
+a {
+  transition: transform 120ms ease, filter 120ms ease, background-color 120ms ease !important;
+}

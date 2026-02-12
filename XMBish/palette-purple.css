@@ -1,0 +1,12 @@
+/* Optional palette: purple twilight variant. */
+
+:root {
+  --xmb-bg-0: #130a25;
+  --xmb-bg-1: #241245;
+  --xmb-bg-2: #3a1f67;
+  --xmb-accent: #b084ff;
+  --xmb-focus: #d1b2ff;
+  --xmb-text: #f5efff;
+  --xmb-text-dim: #d8caef;
+  --xmb-surface: rgba(24, 14, 46, 0.78);
+}
