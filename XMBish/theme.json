@@ -1,13 +1,165 @@
 {
   "name": "XMBish",
   "author": "DBS",
-  "version": "v0.5.0",
-  "description": "XMB-style reskin with stable baseline, optional visual/accessibility patches, and palette variants",
+  "version": "v0.8.0",
+  "description": "XMB-style reskin with anchor overrides, ID-based runtime reflow, and hard column mode",
   "target": "Other",
-  "manifest_version": 8,
+  "manifest_version": 9,
   "inject": {
     "shared.css": [
+      "xmb_core",
+      "xmb_overlay"
+    ]
+  },
+  "patches": {
+    "XMB Structural Layout (Experimental)": {
+      "default": "No",
+      "type": "checkbox",
+      "values": {
+        "Yes": {
+          "layout-xmb-structure.css": [
+            "xmb_core"
+          ]
+        },
+        "No": {}
+      }
+    },
+    "XMB Shell Overlay Prototype": {
+      "default": "No",
+      "type": "checkbox",
+      "values": {
+        "Yes": {
+          "xmb-shell-overlay.css": [
+            "xmb_core"
+          ]
+        },
+        "No": {}
+      }
+    },
+    "Background Effects": {
+      "default": "Yes",
+      "type": "checkbox",
+      "values": {
+        "Yes": {
+          "effects-wave.css": [
+            "xmb_core",
+            "xmb_overlay"
+          ]
+        },
+        "No": {}
+      }
+    },
+    "Strong Focus Highlight": {
+      "default": "Yes",
+      "type": "checkbox",
+      "values": {
+        "Yes": {
+          "focus-strong.css": [
+            "xmb_core",
+            "xmb_overlay"
+          ]
+        },
+        "No": {}
+      }
+    },
+    "Crossbar Emphasis": {
+      "default": "No",
+      "type": "checkbox",
+      "values": {
+        "Yes": {
+          "crossbar-emphasis.css": [
+            "xmb_core",
+            "xmb_overlay"
+          ]
+        },
+        "No": {}
+      }
+    },
+    "High Contrast UI": {
+      "default": "No",
+      "type": "checkbox",
+      "values": {
+        "Yes": {
+          "accessibility-contrast.css": [
+            "xmb_core",
+            "xmb_overlay"
+          ]
+        },
+        "No": {}
+      }
+    },
+    "Color Palette": {
+      "default": "Ocean Blue",
+      "type": "dropdown",
+      "values": {
+        "Ocean Blue": {},
+        "Teal": {
+          "palette-teal.css": [
+            "xmb_core",
+            "xmb_overlay"
+          ]
+        },
+        "Purple": {
+          "palette-purple.css": [
+            "xmb_core",
+            "xmb_overlay"
+          ]
+        },
+        "Monochrome": {
+          "palette-monochrome.css": [
+            "xmb_core",
+            "xmb_overlay"
+          ]
+        }
+      }
+    },
+    "Runtime Anchor Overrides": {
+      "default": "Yes",
+      "type": "checkbox",
+      "values": {
+        "Yes": {
+          "xmb-anchors.css": [
+            "xmb_core"
+          ]
+        },
+        "No": {}
+      }
+    },
+    "XMB Runtime Layout (ID Anchored)": {
+      "default": "Yes",
+      "type": "checkbox",
+      "values": {
+        "Yes": {
+          "xmb-runtime-layout.css": [
+            "xmb_core"
+          ]
+        },
+        "No": {}
+      }
+    },
+    "XMB Hard Column Mode": {
+      "default": "Yes",
+      "type": "checkbox",
+      "values": {
+        "Yes": {
+          "xmb-columns-hard.css": [
+            "xmb_core"
+          ]
+        },
+        "No": {}
+      }
+    }
+  },
+  "flags": [
+    "REQUIRE_NAV_PATCH"
+  ],
+  "tabs": {
+    "xmb_core": [
       "bigpicture",
+      "Steam Big Picture Mode",
+      "SP"
+    ],
+    "xmb_overlay": [
       "QuickAccess.*",
       "MainMenu.*"
     ]

@@ -1,0 +1,64 @@
+/*
+  Phase-2 prototype: explicit XMB shell overlay.
+  NOTE: visual scaffold only (pointer-events disabled), does not yet own navigation behavior.
+*/
+
+:root {
+  --xmb-shell-top: clamp(18px, 2.4vh, 34px);
+  --xmb-shell-left: clamp(18px, 2.4vw, 36px);
+  --xmb-shell-z: 20;
+}
+
+/* Top horizontal category row */
+body::before {
+  content: "HOME   LIBRARY   STORE   SOCIAL   MEDIA   DOWNLOADS   SETTINGS";
+  position: fixed;
+  top: var(--xmb-shell-top);
+  left: var(--xmb-shell-left);
+  right: clamp(18px, 2.4vw, 36px);
+  z-index: var(--xmb-shell-z);
+  pointer-events: none;
+  color: rgba(235, 246, 255, 0.95);
+  font-size: clamp(17px, 1.65vw, 30px);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  white-space: pre;
+}
+
+/* Library vertical submenu scaffold */
+body::after {
+  content: "LIBRARY\A\A  Installed\A  Favorites\A  Non-Steam\A\A  Open Full Library";
+  position: fixed;
+  top: clamp(82px, 12vh, 168px);
+  left: var(--xmb-shell-left);
+  width: min(24vw, 410px);
+  z-index: var(--xmb-shell-z);
+  pointer-events: none;
+  white-space: pre-wrap;
+  color: rgba(228, 241, 255, 0.96);
+  font-size: clamp(14px, 1.28vw, 23px);
+  line-height: 1.55;
+  padding: 14px 16px;
+  border-inline-start: 2px solid rgba(102, 203, 255, 0.65);
+  background: linear-gradient(180deg, rgba(5, 15, 30, 0.64), rgba(5, 15, 30, 0.18));
+  backdrop-filter: blur(3px);
+}
+
+/* Reserve visual space for left-side XMB column to make structure obvious. */
+[class*="gamepadlibrary_GamepadLibrary"],
+[class*="libraryhome"],
+[class*="gamepadhome"],
+[class*="HomePage"] {
+  padding-left: min(26vw, 440px) !important;
+  padding-top: clamp(48px, 7vh, 102px) !important;
+}
+
+/* De-emphasize native top tab row while prototype shell is active. */
+[class*="gamepadtabbedpage_TabContents"],
+[class*="gamepadtabbedpage_TabRow"],
+[role="tablist"] {
+  opacity: 0.35 !important;
+  transform: translateY(8px) !important;
+}

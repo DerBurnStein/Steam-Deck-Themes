@@ -1,0 +1,100 @@
+/*
+  Hard XMB column transformation.
+  Purpose: aggressively reshape Big Picture into a visible XMB-style column experience.
+*/
+
+:root {
+  --xmb-col-top: clamp(64px, 9vh, 132px);
+  --xmb-col-left: clamp(18px, 2.2vw, 34px);
+  --xmb-col-width: min(24vw, 360px);
+  --xmb-col-gap: clamp(10px, 1vw, 16px);
+  --xmb-col-fg: rgba(238, 246, 255, 0.94);
+  --xmb-col-dim: rgba(213, 228, 244, 0.75);
+}
+
+/* Push native content to the right to make room for custom columns area. */
+#Main {
+  padding-left: calc(var(--xmb-col-width) + 48px) !important;
+}
+
+/* XMB top categories with stronger spacing and active indicator under Library. */
+#header::before {
+  content: "HOME\00A0\00A0\00A0LIBRARY\00A0\00A0\00A0STORE\00A0\00A0\00A0SOCIAL\00A0\00A0\00A0MEDIA\00A0\00A0\00A0DOWNLOADS\00A0\00A0\00A0SETTINGS";
+  position: absolute;
+  left: var(--xmb-col-left);
+  top: clamp(8px, 1.2vh, 16px);
+  color: var(--xmb-col-fg);
+  font-size: clamp(14px, 1.22vw, 22px);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  font-weight: 550;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+#header::after {
+  content: "";
+  position: absolute;
+  left: calc(var(--xmb-col-left) + 120px);
+  top: clamp(34px, 4.6vh, 58px);
+  width: clamp(90px, 8vw, 130px);
+  height: 2px;
+  background: rgba(123, 214, 255, 0.9);
+  box-shadow: 0 0 10px rgba(123, 214, 255, 0.38);
+  pointer-events: none;
+}
+
+/* Hard left library column scaffold. */
+#Main::before {
+  content: "LIBRARY\A\AInstalled\AFavorites\ANon-Steam\A\AOpen Full Library";
+  position: absolute;
+  left: var(--xmb-col-left);
+  top: var(--xmb-col-top);
+  width: var(--xmb-col-width);
+  white-space: pre-wrap;
+  color: var(--xmb-col-fg);
+  font-size: clamp(15px, 1.2vw, 21px);
+  line-height: 1.6;
+  letter-spacing: 0.02em;
+  padding: 14px 14px 20px;
+  border-left: 2px solid rgba(122, 214, 255, 0.72);
+  background:
+    linear-gradient(180deg, rgba(8, 14, 28, 0.72), rgba(8, 14, 28, 0.15));
+  backdrop-filter: blur(5px);
+  pointer-events: none;
+}
+
+/* Native top-level tab rows are hidden in hard mode to avoid mixed IA. */
+#Main [role="tablist"],
+#Main [class*="tabbedpage_TabContents"],
+#Main [class*="tabbedpage_TabRow"] {
+  display: none !important;
+}
+
+/* Turn likely horizontal carousels into denser vertical stacks (strong structural change). */
+#Main [class*="Carousel"],
+#Main [class*="carousel"],
+#Main [class*="Shelf"],
+#Main [class*="shelf"],
+#Main [class*="Recent"],
+#Main [class*="recent"] {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: var(--xmb-col-gap) !important;
+  align-content: start;
+}
+
+#Main [class*="Carousel"] [class*="Tile"],
+#Main [class*="carousel"] [class*="Tile"],
+#Main [class*="Shelf"] [class*="Tile"],
+#Main [class*="shelf"] [class*="Tile"],
+#Main [class*="Recent"] [class*="Tile"],
+#Main [class*="recent"] [class*="Tile"] {
+  width: min(58vw, 960px) !important;
+  max-width: min(58vw, 960px) !important;
+}
+
+/* Keep footer readable but less dominant in hard mode. */
+#Footer {
+  opacity: 0.85;
+}

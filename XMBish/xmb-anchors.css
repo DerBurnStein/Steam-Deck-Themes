@@ -1,0 +1,132 @@
+/*
+  XMBish anchor patch for Steam Deck Big Picture runtime.
+  Uses IDs/classes observed in live runtime snapshots.
+*/
+
+:root {
+  --xmb-text: rgba(255, 255, 255, 0.92);
+  --xmb-dim: rgba(255, 255, 255, 0.70);
+  --xmb-accent: rgba(120, 210, 255, 0.95);
+  --xmb-surface: rgba(10, 18, 36, 0.62);
+  --xmb-surface-2: rgba(8, 14, 28, 0.75);
+  --xmb-focusbar: rgba(255, 255, 255, 0.14);
+  --xmb-glow: rgba(110, 210, 255, 0.22);
+}
+
+/* Neutralize native root skin and install XMB wave inside real root container. */
+#GamepadUI_Full_Root.b084mAvY8rgVMr3H04g9g {
+  background: transparent !important;
+}
+
+#GamepadUI_Full_Root {
+  position: relative !important;
+  isolation: isolate !important;
+}
+
+#GamepadUI_Full_Root::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(1200px 800px at 18% 18%, rgba(90, 140, 255, 0.30), transparent 55%),
+    radial-gradient(900px 700px at 78% 25%, rgba(0, 210, 255, 0.18), transparent 60%),
+    radial-gradient(900px 700px at 30% 88%, rgba(160, 80, 255, 0.15), transparent 60%),
+    linear-gradient(160deg, rgba(9, 15, 34, 0.98), rgba(5, 8, 18, 0.99));
+}
+
+#GamepadUI_Full_Root::after {
+  content: "";
+  position: absolute;
+  inset: -30%;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.09) 45%, rgba(255, 255, 255, 0) 60%),
+    linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.06) 35%, rgba(255, 255, 255, 0) 55%);
+  filter: blur(18px);
+  opacity: 0.45;
+  animation: xmb_wave_drift 18s linear infinite;
+}
+
+@keyframes xmb_wave_drift {
+  0% {
+    transform: translate(-6%, -2%) rotate(-6deg);
+  }
+  50% {
+    transform: translate(6%, 2%) rotate(6deg);
+  }
+  100% {
+    transform: translate(-6%, -2%) rotate(-6deg);
+  }
+}
+
+/* Header/footer become translucent bars. */
+#header {
+  background: linear-gradient(180deg, rgba(7, 14, 28, 0.72), rgba(7, 14, 28, 0.20)) !important;
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(120, 210, 255, 0.18) !important;
+}
+
+#Footer {
+  background: linear-gradient(0deg, rgba(7, 14, 28, 0.78), rgba(7, 14, 28, 0.20)) !important;
+  backdrop-filter: blur(14px);
+  border-top: 1px solid rgba(120, 210, 255, 0.18) !important;
+}
+
+#Main {
+  color: var(--xmb-text) !important;
+}
+
+#Main .Panel {
+  background: transparent !important;
+}
+
+/* XMB-like selection bars. */
+.gpfocus,
+.gpfocuswithin {
+  position: relative;
+  background: var(--xmb-focusbar) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.10) inset, 0 0 14px var(--xmb-glow) !important;
+}
+
+.gpfocus::before,
+.gpfocuswithin::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  pointer-events: none;
+  box-shadow: inset 3px 0 0 0 var(--xmb-accent);
+  opacity: 0.85;
+}
+
+/* Real tab classnames observed in runtime dump. */
+[role="tab"]._3eEbSktrstBdLk0dVpnKVI {
+  text-transform: uppercase !important;
+  letter-spacing: 0.10em !important;
+  font-weight: 600 !important;
+  color: var(--xmb-dim) !important;
+  padding: 8px 12px !important;
+  border-radius: 6px !important;
+  transition: transform 140ms ease, filter 140ms ease, background-color 140ms ease;
+}
+
+[role="tab"]._3eEbSktrstBdLk0dVpnKVI._3Gp1bACHx__POxmy6Gd3kG {
+  color: var(--xmb-text) !important;
+  background: linear-gradient(90deg, rgba(120, 210, 255, 0.22), rgba(120, 210, 255, 0.02)) !important;
+  box-shadow: inset 0 -2px 0 0 var(--xmb-accent) !important;
+}
+
+[role="tab"]._3eEbSktrstBdLk0dVpnKVI.gpfocus {
+  transform: translateY(-1px);
+  filter: brightness(1.07);
+}
+
+#Main [role="listitem"].Panel {
+  border-radius: 8px !important;
+  padding: 6px 10px !important;
+  margin: 2px 0 !important;
+}
