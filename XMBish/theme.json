@@ -163,5 +163,91 @@
       "QuickAccess.*",
       "MainMenu.*"
     ]
+  },
+  "patches": {
+    "Background Effects": {
+      "default": "Yes",
+      "type": "checkbox",
+      "values": {
+        "Yes": {
+          "effects-wave.css": [
+            "bigpicture",
+            "QuickAccess.*",
+            "MainMenu.*"
+          ]
+        },
+        "No": {}
+      }
+    },
+    "Strong Focus Highlight": {
+      "default": "Yes",
+      "type": "checkbox",
+      "values": {
+        "Yes": {
+          "focus-strong.css": [
+            "bigpicture",
+            "QuickAccess.*",
+            "MainMenu.*"
+          ]
+        },
+        "No": {}
+      }
+    },
+    "Crossbar Emphasis": {
+      "default": "No",
+      "type": "checkbox",
+      "values": {
+        "Yes": {
+          "crossbar-emphasis.css": [
+            "bigpicture",
+            "QuickAccess.*",
+            "MainMenu.*"
+          ]
+        },
+        "No": {}
+      }
+    },
+    "High Contrast UI": {
+      "default": "No",
+      "type": "checkbox",
+      "values": {
+        "Yes": {
+          "accessibility-contrast.css": [
+            "bigpicture",
+            "QuickAccess.*",
+            "MainMenu.*"
+          ]
+        },
+        "No": {}
+      }
+    },
+    "Color Palette": {
+      "default": "Ocean Blue",
+      "type": "dropdown",
+      "values": {
+        "Ocean Blue": {},
+        "Teal": {
+          "palette-teal.css": [
+            "bigpicture",
+            "QuickAccess.*",
+            "MainMenu.*"
+          ]
+        },
+        "Purple": {
+          "palette-purple.css": [
+            "bigpicture",
+            "QuickAccess.*",
+            "MainMenu.*"
+          ]
+        },
+        "Monochrome": {
+          "palette-monochrome.css": [
+            "bigpicture",
+            "QuickAccess.*",
+            "MainMenu.*"
+          ]
+        }
+      }
+    }
   }
 }
