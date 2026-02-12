@@ -1,27 +1,74 @@
 /*
-  XMBish - Steam Deck CSS Loader theme
-  Notes:
-  - Keep selectors short and resilient.
-  - Start with styling only.  Avoid large layout reflows until you have stable selectors.
+  XMBish - stable baseline stylesheet
+  This file aims to be conservative and resilient across Steam updates.
 */
 
-/* Step 1 sanity check: enable this temporarily to confirm injection.
-* { outline: 1px solid rgba(255, 0, 0, 0.05) !important; }
-*/
-
-/* Global vibe tweaks */
-html, body {
-  filter: saturate(0.92) contrast(1.03) !important;
+:root {
+  --xmb-bg-0: #071327;
+  --xmb-bg-1: #0d2242;
+  --xmb-bg-2: #163863;
+  --xmb-accent: #59cfff;
+  --xmb-focus: #95e3ff;
+  --xmb-text: #eaf4ff;
+  --xmb-text-dim: #bad0e4;
+  --xmb-surface: rgba(11, 24, 47, 0.74);
 }
 
-/* Reduce heavy shadows and rounded corners for a cleaner XMB-like feel */
-* {
-  box-shadow: none !important;
-}
-
-/* Slightly tighten typography */
-* {
+html,
+body {
+  background: linear-gradient(155deg, var(--xmb-bg-0) 0%, var(--xmb-bg-1) 42%, var(--xmb-bg-2) 100%) !important;
+  color: var(--xmb-text) !important;
   letter-spacing: 0.2px !important;
 }
 
-/* Placeholder for future: dynamic background layer will go here once we capture a stable root selector. */
+/* Core shell surfaces only (safer than global wildcard targeting). */
+[class*="DialogContent"],
+[class*="ModalPosition_Content"],
+[class*="gamepadui_BasicUI"],
+[class*="gamepadlibrary_GamepadLibrary"],
+[class*="appdetails"] {
+  background: var(--xmb-surface) !important;
+  box-shadow: none !important;
+  border-color: rgba(130, 190, 233, 0.22) !important;
+}
+
+/* Top navigation crossbar treatment. */
+[class*="gamepadtabbedpage_Tab"],
+[class*="gamepadtabbedpage_Tab_"],
+[role="tab"] {
+  border-radius: 4px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  font-weight: 500 !important;
+  color: var(--xmb-text-dim) !important;
+  transition: background-color 140ms ease, color 140ms ease;
+}
+
+[class*="gamepadtabbedpage_Selected"],
+[role="tab"][aria-selected="true"] {
+  color: var(--xmb-text) !important;
+  background: linear-gradient(90deg, rgba(89, 207, 255, 0.23), rgba(89, 207, 255, 0.03)) !important;
+  box-shadow: inset 0 -2px 0 0 var(--xmb-accent) !important;
+}
+
+/* Conservative radius trim for a flatter XMB look. */
+button,
+[class*="DialogButton"],
+[class*="Tile"],
+[class*="Card"] {
+  border-radius: 6px !important;
+}
+
+/* Overlay menus remain readable against darker background. */
+[class*="QuickAccess"],
+[class*="MainMenu"] {
+  background: linear-gradient(180deg, rgba(7, 16, 32, 0.94), rgba(12, 25, 48, 0.95)) !important;
+}
+
+/* Respect reduced motion preference where propagated by runtime. */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

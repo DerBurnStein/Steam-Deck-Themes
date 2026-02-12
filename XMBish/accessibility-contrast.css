@@ -1,0 +1,23 @@
+/* Optional patch: improves readability from couch distance. */
+
+:root {
+  --xmb-text: #f2f8ff;
+  --xmb-text-dim: #d2e3f5;
+}
+
+html,
+body {
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
+}
+
+[class*="DialogContent"],
+[class*="ModalPosition_Content"],
+[class*="QuickAccess"],
+[class*="MainMenu"] {
+  background-color: rgba(7, 15, 30, 0.9) !important;
+}
+
+[class*="DialogButton"],
+button {
+  border: 1px solid rgba(149, 227, 255, 0.25) !important;
+}

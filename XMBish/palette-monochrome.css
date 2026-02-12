@@ -1,0 +1,12 @@
+/* Optional palette: monochrome/steel variant. */
+
+:root {
+  --xmb-bg-0: #101317;
+  --xmb-bg-1: #1b2129;
+  --xmb-bg-2: #283340;
+  --xmb-accent: #d4e4f5;
+  --xmb-focus: #eef5ff;
+  --xmb-text: #f2f6fb;
+  --xmb-text-dim: #cfdae5;
+  --xmb-surface: rgba(16, 21, 28, 0.8);
+}
